@@ -145,10 +145,10 @@
                 <div id="calculadoraB41">
                     <h2>Fracionamento do período Autodeclarado - B41</h2>
 
-                    <label for="dataInicial">Data Inicial (data mais afastada da DER):</label>
+                    <label for="dataInicial">Data Inicial:</label>
                     <input type="date" id="dataInicial">
 
-                    <label for="dataFinal">Data Final (data mais próxima da DER):</label>
+                    <label for="dataFinal">Data Final:</label>
                     <input type="date" id="dataFinal">
 
                     <button onclick="calcularDatas()">Calcular</button>
@@ -172,21 +172,32 @@
 
             <!-- Caixa "Remover Pontos e Traços" -->
             <div class="remove-form">
-                <h1>REMOVE TRAÇOS E PONTOS</h1>
+                <h1>Limpar NB e CPF</h1>
                 
                 <label for="numero">Insira um número:</label><br>
                 <input type="text" id="numero"><br><br>
-                <button onclick="limparNumero()">Remover</button><br><br>
+                <button onclick="limparNumero()">Limpar</button><br><br>
                 <div id="limparResultado" class="resultado"></div>
             </div>
         </div>
     </div>
 
-    <div class="footer">
-            <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
+    <div id="contadorAcessos" class="footer">
+        Total de acessos: 0 <!-- O número inicial será substituído pelo JS -->
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var acessos = localStorage.getItem('acessos') || 0;
+            acessos++;
+            localStorage.setItem('acessos', acessos);
+
+            var contadorElement = document.getElementById('contadorAcessos');
+            if (contadorElement) {
+                contadorElement.innerHTML = 'Total de acessos: ' + acessos;
+            }
+        });
+
         function calcularDatas() {
             var dataInicial = new Date(document.getElementById('dataInicial').value + "T00:00:00");
             var dataFinal = new Date(document.getElementById('dataFinal').value + "T00:00:00");
@@ -251,5 +262,10 @@
             document.getElementById('limparResultado').innerHTML = 'Limpíssimo: ' + numeroLimpo;
         }
     </script>
+
+    <div class="footer">
+        <p>Calculadora de uso interno - reservado aos servidores do quadro ativo do INSS.</p>
+        <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
+    </div>
 </body>
 </html>
