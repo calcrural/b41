@@ -6,25 +6,29 @@
     <title>Calculadoras B41 e B80 RURAL</title>
     <style>
         body {
+            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
         }
 
         .container {
-            max-width: 700px; /* Reduzi o tamanho do container */
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 800px;
+            background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin: 20px;
+            width: 100%;
         }
 
-        h1, h2 {
+        h1 {
             text-align: center;
-            color: #000; /* Texto em preto */
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Sombra no texto */
+            color: #333;
         }
 
         label {
@@ -40,7 +44,6 @@
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 16px;
         }
 
         button {
@@ -54,9 +57,6 @@
             display: block;
             margin: 0 auto;
             transition: background-color 0.3s;
-            width: 100%;
-            max-width: 200px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Sombra no texto do botão */
         }
 
         button:hover {
@@ -68,20 +68,18 @@
             font-size: 24px;
             margin-top: 20px;
             color: #007bff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Sombra no texto do resultado */
         }
 
         .timeline {
             display: flex;
             align-items: center;
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
             flex-wrap: wrap;
             justify-content: center;
             border-radius: 8px;
-            overflow: hidden;
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra na linha do tempo */
         }
 
         .date-box {
@@ -92,8 +90,6 @@
             background-color: #007bff;
             color: #fff;
             border-radius: 4px;
-            min-width: 100px;
-            box-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Sombra na caixa de data */
         }
 
         .date-box.ate {
@@ -105,55 +101,90 @@
             font-size: 14px;
             color: #555;
             margin-top: 20px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Sombra no texto do rodapé */
         }
 
-        @media (min-width: 768px) {
-            .container {
-                padding: 20px;
-            }
+        .remove-form {
+            width: 250px;
+            height: 350px;
+            padding-left: 25px;
+            padding-right: 25px;
+            max-width: 100%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 20px;
         }
 
-        @media (min-width: 992px) {
-            .container {
-                max-width: 1000px;
-            }
+        .remove-form label {
+            color: #555;
+        }
+
+        .remove-form input {
+            width: calc(100% - 16px);
+        }
+
+        .remove-form button {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .remove-form #limparResultado {
+            font-size: 16px;
+            margin-top: 10px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Calculadoras B41 e B80 RURAL</h1>
+        <div style="display: flex; gap: 20px;">
+            <div>
+                <h1>Calculadoras B41 e B80 RURAL</h1>
 
-        <div id="calculadoraB41">
-            <h2>Calculadora B41 RURAL</h2>
+                <div id="calculadoraB41">
+                    <h2>Fracionamento do período Autodeclarado - B41</h2>
 
-            <label for="dataInicial">Data Inicial:</label>
-            <input type="date" id="dataInicial">
+                    <label for="dataInicial">Data Inicial:</label>
+                    <input type="date" id="dataInicial">
 
-            <label for="dataFinal">Data Final:</label>
-            <input type="date" id="dataFinal">
+                    <label for="dataFinal">Data Final:</label>
+                    <input type="date" id="dataFinal">
 
-            <button onclick="calcularDatas()">Calcular</button>
+                    <button onclick="calcularDatas()">Calcular</button>
 
-            <div id="linhaDoTempo" class="timeline"></div>
-        </div>
+                    <div class="anos-diferenca" id="anosDiferenca"></div>
 
-        <div id="calculadoraB80">
-            <h2>Calculadora B80 RURAL</h2>
+                    <div id="linhaDoTempo" class="timeline"></div>
+                </div>
 
-            <label for="dataFatoGerador">Data do Parto:</label>
-            <input type="date" id="dataFatoGerador">
+                <div id="calculadoraB80">
+                    <h2>Data início da gravidez - B80</h2>
 
-            <button onclick="calcular()">Calcular</button>
+                    <label for="dataFatoGerador">Data do Parto:</label>
+                    <input type="date" id="dataFatoGerador">
 
-            <div id="resultado" class="resultado"></div>
+                    <button onclick="calcular()">Calcular</button>
+
+                    <div id="resultado" class="resultado"></div>
+                </div>
+            </div>
+
+            <!-- Caixa "Remover Pontos e Traços" -->
+            <div class="remove-form">
+                <h1>Limpar NB e CPF</h1>
+                
+                <label for="numero">Insira um número:</label><br>
+                <input type="text" id="numero"><br><br>
+                <button onclick="limparNumero()">Limpar</button><br><br>
+                <div id="limparResultado" class="resultado"></div>
+            </div>
         </div>
     </div>
 
     <div class="footer">
-        <p>Calculadora de uso interno - reservada aos servidores do quadro ativo do INSS.</p>
-        <p>Desenvolvido por ESTANISLAU MORAIS - SARD/GEXIMP - Todos os direitos reservados - copyright ©.</p>
+        <p>Calculadora de uso interno - reservado aos servidores do quadro ativo do INSS.</p>
+        <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
     </div>
 
     <script>
@@ -199,6 +230,9 @@
 
                 dataAtual = novaData;
             }
+
+            var diferencaAnos = dataFinal.getFullYear() - dataInicial.getFullYear();
+            document.getElementById('anosDiferenca').innerHTML = 'Total Autodeclarado: ' + diferencaAnos + ' anos';
         }
 
         function calcular() {
@@ -210,6 +244,12 @@
 
             var resultadoTexto = "A data provável do início da gravidez é: " + novaData.toLocaleDateString('pt-BR');
             resultadoElement.textContent = resultadoTexto;
+        }
+
+        function limparNumero() {
+            var numero = document.getElementById('numero').value;
+            var numeroLimpo = numero.replace(/[.-\s]/g, '');
+            document.getElementById('limparResultado').innerHTML = 'Limpíssimo: ' + numeroLimpo;
         }
     </script>
 </body>
