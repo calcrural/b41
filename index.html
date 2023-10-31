@@ -29,6 +29,14 @@
         h1 {
             text-align: center;
             color: #333;
+            font-size: 24px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 10px;
         }
 
         label {
@@ -104,125 +112,98 @@
             line-height: 1.0;
             margin-bottom: 0;
         }
-
-        .remove-form {
-            width: 250px;
-            margin-top: 100px;
-            max-width: 100%;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 10px;
-            margin: 10px;
-        }
-
-        .remove-form h1 {
-            font-size: 90%;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .remove-form label {
-            color: #555;
-        }
-
-        .remove-form input {
-            width: calc(100% - 16px);
-        }
-
-        .remove-form button {
-            margin-top: 10px;
-            width: 100%;
-        }
-
-        .remove-form #limparResultado {
-            font-size: 14px;
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .total-acessos {
-            text-align: center;
-            font-size: 14px;
-            color: #555;
-            margin-top: 20px;
-        }
-
-        .total-acessos img {
-            width: 18px;
-            vertical-align: middle;
-            margin-right: 5px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div style="display: flex; gap: 10px;">
-            <div>
-                <h1>Calculadoras B41 e B80 RURAL</h1>
+        <h1>Calculadoras B41 e B80 RURAL</h1>
 
-                <div id="calculadoraB41">
-                    <h2>Fracionamento Autodeclaração - B41</h2>
+        <div id="calculadoraB41">
+            <h2>Fracionamento Autodeclaração - B41</h2>
 
-                    <label for="dataInicial">Data Inicial:</label>
-                    <input type="date" id="dataInicial">
+            <label for="dataInicial">Data Inicial:</label>
+            <input type="date" id="dataInicial">
 
-                    <label for="dataFinal">Data Final:</label>
-                    <input type="date" id="dataFinal">
+            <label for="dataFinal">Data Final:</label>
+            <input type="date" id="dataFinal">
 
-                    <button onclick="calcularDatas()">Calcular</button>
+            <button onclick="calcularDatas()">Calcular</button>
 
-                    <div class="anos-diferenca" id="anosDiferenca"></div>
+            <div class="anos-diferenca" id="anosDiferenca"></div>
 
-                    <div id="linhaDoTempo" class="timeline"></div>
-                </div>
+            <div id="linhaDoTempo" class="timeline"></div>
+        </div>
 
-                <div id="calculadoraB80">
-                    <h2>Data início da gravidez - B80</h2>
+        <div id="calculadoraB80">
+            <h2>Data início da gravidez - B80</h2>
 
-                    <label for="dataFatoGerador">Data do Parto:</label>
-                    <input type="date" id="dataFatoGerador">
+            <label for="dataFatoGerador">Data do Parto:</label>
+            <input type="date" id="dataFatoGerador">
 
-                    <button onclick="calcular()">Calcular</button>
+            <button onclick="calcular()">Calcular</button>
 
-                    <div id="resultado" class="resultado"></div>
-                </div>
-            </div>
-
-            <div class="remove-form">
-                <h1>REMOVE PONTO E TRAÇO</h1>
-                
-                <label for="numero">Insira um número:</label><br>
-                <input type="text" id="numero"><br><br>
-                <button onclick="limparNumero()">Remover</button><br><br>
-                <div id="limparResultado" class="resultado"></div>
-            </div>
+            <div id="resultado" class="resultado"></div>
         </div>
     </div>
 
-    <div class="total-acessos">
-        <img src="icone-acesso.png" alt="Ícone de acesso">
-        Total de acessos: <span id="contadorAcessos">0</span>
-    </div>
     <div class="footer">
         <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var acessos = localStorage.getItem('acessos') || 0;
-            acessos++;
-            localStorage.setItem('acessos', acessos);
+        function calcularDatas() {
+            var dataInicial = new Date(document.getElementById('dataInicial').value + "T00:00:00");
+            var dataFinal = new Date(document.getElementById('dataFinal').value + "T00:00:00");
+            var fracaoAnos = 7;
+            var fracaoMeses = 6;
 
-            var contadorElement = document.getElementById('contadorAcessos');
-            if (contadorElement) {
-                contadorElement.innerHTML = acessos;
+            var linhaDoTempo = document.getElementById('linhaDoTempo');
+            linhaDoTempo.innerHTML = '';
+
+            var dataAtual = new Date(dataFinal);
+
+            while (dataAtual >= dataInicial) {
+                var dateBox = document.createElement('div');
+                dateBox.classList.add('date-box');
+                dateBox.textContent = dataAtual.toLocaleDateString('pt-BR');
+                linhaDoTempo.appendChild(dateBox);
+
+                var novaData = new Date(dataAtual);
+                novaData.setFullYear(dataAtual.getFullYear() - fracaoAnos);
+
+                var meses = novaData.getMonth() - fracaoMeses;
+                novaData.setMonth(meses);
+
+                if (novaData >= dataInicial) {
+                    var ateLabel = document.createElement('div');
+                    ateLabel.classList.add('date-box', 'ate');
+                    ateLabel.textContent = 'até';
+                    linhaDoTempo.appendChild(ateLabel);
+                } else {
+                    var ateLabel = document.createElement('div');
+                    ateLabel.classList.add('date-box', 'ate');
+                    ateLabel.textContent = 'até';
+                    linhaDoTempo.appendChild(ateLabel);
+
+                    var ultimaDateBox = document.createElement('div');
+                    ultimaDateBox.classList.add('date-box');
+                    ultimaDateBox.textContent = dataInicial.toLocaleDateString('pt-BR');
+                    linhaDoTempo.appendChild(ultimaDateBox);
+                }
+
+                dataAtual = novaData;
             }
-        });
+        }
 
-        function limparNumero() {
-            var numeroInput = document.getElementById('numero');
-            var resultadoLimpo = numeroInput.value.replace(/[.-]/g, '');
-            document.getElementById('limparResultado').innerHTML = resultadoLimpo;
+        function calcular() {
+            var dataFatoGerador = new Date(document.getElementById('dataFatoGerador').value + "T00:00:00");
+            var resultadoElement = document.getElementById('resultado');
+
+            var novaData = new Date(dataFatoGerador);
+            novaData.setMonth(dataFatoGerador.getMonth() - 10);
+
+            var resultadoTexto = "A data provável do início da gravidez é: " + novaData.toLocaleDateString('pt-BR');
+            resultadoElement.textContent = resultadoTexto;
         }
     </script>
 </body>
