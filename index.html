@@ -112,12 +112,14 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin: 20px;
+            padding: 30px 20px; /* Aumenta o padding e ajusta o tamanho da caixa */
+            margin: 30px 20px; /* Aumenta a margem */
         }
 
         .remove-form h1 {
-            font-size: 60%; /* Reduz o tamanho em 40% */
+            font-size: 80%; /* Aumenta o tamanho do texto em 20% */
+            font-weight: bold; /* Coloca o texto em negrito */
+            margin-bottom: 10px; /* Adiciona um pouco de espaço abaixo do texto */
         }
 
         .remove-form label {
@@ -126,6 +128,7 @@
 
         .remove-form input {
             width: calc(100% - 16px);
+            margin-bottom: 10px; /* Adiciona um pouco de espaço abaixo do input */
         }
 
         .remove-form button {
@@ -137,6 +140,19 @@
             font-size: 16px;
             margin-top: 10px;
             text-align: center;
+        }
+
+        .total-acessos {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            color: #555;
+            margin-top: 20px; /* Adiciona um pouco de espaço acima do texto */
+        }
+
+        .total-acessos img {
+            margin-right: 10px;
+            width: 30px; /* Tamanho do ícone (ajuste conforme necessário) */
         }
     </style>
 </head>
@@ -186,12 +202,28 @@
         </div>
     </div>
 
-    <div id="contadorAcessos" class="footer">
-        Total de acessos: 0 <!-- O número inicial será substituído pelo JS -->
+    <div class="total-acessos">
+        <img src="icone-acesso.png" alt="Ícone de acesso"> <!-- Substitua "icone-acesso.png" pelo caminho do seu ícone -->
+        Total de acessos: <span id="contadorAcessos">0</span> <!-- O número inicial será substituído pelo JS -->
     </div>
 
     <div class="footer">
         <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var acessos = localStorage.getItem('acessos') || 0;
+            acessos++;
+            localStorage.setItem('acessos', acessos);
+
+            var contadorElement = document.getElementById('contadorAcessos');
+            if (contadorElement) {
+                contadorElement.innerHTML = acessos;
+            }
+        });
+
+        // Restante do seu script...
+    </script>
 </body>
 </html>
