@@ -116,6 +116,10 @@
             margin: 20px;
         }
 
+        .remove-form h1 {
+            font-size: 60%; /* Reduz o tamanho em 40% */
+        }
+
         .remove-form label {
             color: #555;
         }
@@ -143,7 +147,7 @@
                 <h1>Calculadoras B41 e B80 RURAL</h1>
 
                 <div id="calculadoraB41">
-                    <h2>Fracionamento do período Autodeclarado - B41</h2>
+                    <h2>Fracionamento Autodeclaração - B41</h2>
 
                     <label for="dataInicial">Data Inicial:</label>
                     <input type="date" id="dataInicial">
@@ -172,11 +176,11 @@
 
             <!-- Caixa "Remover Pontos e Traços" -->
             <div class="remove-form">
-                <h1>Limpar NB e CPF</h1>
+                <h1>REMOVE PONTO E TRAÇO</h1>
                 
                 <label for="numero">Insira um número:</label><br>
                 <input type="text" id="numero"><br><br>
-                <button onclick="limparNumero()">Limpar</button><br><br>
+                <button onclick="limparNumero()">Remover</button><br><br>
                 <div id="limparResultado" class="resultado"></div>
             </div>
         </div>
@@ -186,85 +190,7 @@
         Total de acessos: 0 <!-- O número inicial será substituído pelo JS -->
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var acessos = localStorage.getItem('acessos') || 0;
-            acessos++;
-            localStorage.setItem('acessos', acessos);
-
-            var contadorElement = document.getElementById('contadorAcessos');
-            if (contadorElement) {
-                contadorElement.innerHTML = 'Total de acessos: ' + acessos;
-            }
-        });
-
-        function calcularDatas() {
-            var dataInicial = new Date(document.getElementById('dataInicial').value + "T00:00:00");
-            var dataFinal = new Date(document.getElementById('dataFinal').value + "T00:00:00");
-            var fracaoAnos = 7;
-            var fracaoMeses = 6;
-
-            var linhaDoTempo = document.getElementById('linhaDoTempo');
-            linhaDoTempo.innerHTML = '';
-
-            var dataAtual = new Date(dataFinal);
-
-            while (dataAtual >= dataInicial) {
-                var dateBox = document.createElement('div');
-                dateBox.classList.add('date-box');
-                dateBox.textContent = dataAtual.toLocaleDateString('pt-BR');
-                linhaDoTempo.appendChild(dateBox);
-
-                var novaData = new Date(dataAtual);
-                novaData.setFullYear(dataAtual.getFullYear() - fracaoAnos);
-
-                var meses = novaData.getMonth() - fracaoMeses;
-                novaData.setMonth(meses);
-
-                if (novaData >= dataInicial) {
-                    var ateLabel = document.createElement('div');
-                    ateLabel.classList.add('date-box', 'ate');
-                    ateLabel.textContent = 'até';
-                    linhaDoTempo.appendChild(ateLabel);
-                } else {
-                    var ateLabel = document.createElement('div');
-                    ateLabel.classList.add('date-box', 'ate');
-                    ateLabel.textContent = 'até';
-                    linhaDoTempo.appendChild(ateLabel);
-
-                    var ultimaDateBox = document.createElement('div');
-                    ultimaDateBox.classList.add('date-box');
-                    ultimaDateBox.textContent = dataInicial.toLocaleDateString('pt-BR');
-                    linhaDoTempo.appendChild(ultimaDateBox);
-                }
-
-                dataAtual = novaData;
-            }
-
-            var diferencaAnos = dataFinal.getFullYear() - dataInicial.getFullYear();
-            document.getElementById('anosDiferenca').innerHTML = 'Total Autodeclarado: ' + diferencaAnos + ' anos';
-        }
-
-        function calcular() {
-            var dataFatoGerador = new Date(document.getElementById('dataFatoGerador').value + "T00:00:00");
-            var resultadoElement = document.getElementById('resultado');
-
-            var novaData = new Date(dataFatoGerador);
-            novaData.setMonth(dataFatoGerador.getMonth() - 10);
-
-            var resultadoTexto = "A data provável do início da gravidez é: " + novaData.toLocaleDateString('pt-BR');
-            resultadoElement.textContent = resultadoTexto;
-        }
-
-        function limparNumero() {
-            var numero = document.getElementById('numero').value;
-            var numeroLimpo = numero.replace(/[.-\s]/g, '');
-            document.getElementById('limparResultado').innerHTML = 'Limpíssimo: ' + numeroLimpo;
-        }
-    </script>
-
     <div class="footer">
-        <p>Calculadora de uso interno - reservado aos servidores do quadro ativo do INSS.</p>
         <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
     </div>
 </body>
