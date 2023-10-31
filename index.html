@@ -17,16 +17,16 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 800px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 10px;
-            margin: 10px;
+            padding: 20px;
+            margin: 20px;
             width: 100%;
         }
 
-        h1, h2 {
+        h1 {
             text-align: center;
             color: #333;
         }
@@ -65,8 +65,8 @@
 
         .resultado {
             text-align: center;
-            font-size: 20px;
-            margin-top: 10px;
+            font-size: 24px;
+            margin-top: 20px;
             color: #007bff;
         }
 
@@ -75,7 +75,7 @@
             align-items: center;
             width: 100%;
             border: 1px solid #ccc;
-            padding: 5px;
+            padding: 10px;
             background-color: #fff;
             flex-wrap: wrap;
             justify-content: center;
@@ -85,8 +85,8 @@
         .date-box {
             text-align: center;
             border: 1px solid #ccc;
-            padding: 3px;
-            margin: 3px;
+            padding: 5px;
+            margin: 5px;
             background-color: #007bff;
             color: #fff;
             border-radius: 4px;
@@ -101,38 +101,19 @@
             font-size: 14px;
             color: #555;
             margin-top: 20px;
-            line-height: 1.0;
-            margin-bottom: 0;
-        }
-
-        .total-acessos {
-            text-align: center;
-            font-size: 14px;
-            color: #555;
-            margin-top: 20px;
-        }
-
-        .total-acessos img {
-            width: 18px;
-            vertical-align: middle;
-            margin-right: 5px;
         }
 
         .remove-form {
             width: 250px;
-            margin-top: 100px;
+            height: 350px;
+            padding-left: 25px;
+            padding-right: 25px;
             max-width: 100%;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 10px;
-            margin: 10px;
-        }
-
-        .remove-form h1 {
-            font-size: 90%;
-            font-weight: bold;
-            margin-bottom: 10px;
+            padding: 20px;
+            margin: 20px;
         }
 
         .remove-form label {
@@ -149,7 +130,7 @@
         }
 
         .remove-form #limparResultado {
-            font-size: 14px;
+            font-size: 16px;
             margin-top: 10px;
             text-align: center;
         }
@@ -157,42 +138,52 @@
 </head>
 <body>
     <div class="container">
-        <h1>Calculadoras B41 e B80 RURAL</h1>
+        <div style="display: flex; gap: 20px;">
+            <div>
+                <h1>Calculadoras B41 e B80 RURAL</h1>
 
-        <div id="calculadoraB41">
-            <h2>Fracionamento Autodeclaração - B41</h2>
+                <div id="calculadoraB41">
+                    <h2>Fracionamento da Autodeclaração- B41</h2>
 
-            <label for="dataInicial">Data Inicial:</label>
-            <input type="date" id="dataInicial">
+                    <label for="dataInicial">Data Inicial:</label>
+                    <input type="date" id="dataInicial">
 
-            <label for="dataFinal">Data Final:</label>
-            <input type="date" id="dataFinal">
+                    <label for="dataFinal">Data Final:</label>
+                    <input type="date" id="dataFinal">
 
-            <button onclick="calcularDatas()">Calcular</button>
+                    <button onclick="calcularDatas()">Calcular</button>
 
-            <div class="anos-diferenca" id="anosDiferenca"></div>
+                    <div class="anos-diferenca" id="anosDiferenca"></div>
 
-            <div id="linhaDoTempo" class="timeline"></div>
-        </div>
+                    <div id="linhaDoTempo" class="timeline"></div>
+                </div>
 
-        <div id="calculadoraB80">
-            <h2>Data início da gravidez - B80</h2>
+                <div id="calculadoraB80">
+                    <h2>Data início da gravidez - B80</h2>
 
-            <label for="dataFatoGerador">Data do Parto:</label>
-            <input type="date" id="dataFatoGerador">
+                    <label for="dataFatoGerador">Data do Parto:</label>
+                    <input type="date" id="dataFatoGerador">
 
-            <button onclick="calcular()">Calcular</button>
+                    <button onclick="calcular()">Calcular</button>
 
-            <div id="resultado" class="resultado"></div>
+                    <div id="resultado" class="resultado"></div>
+                </div>
+            </div>
+
+            <!-- Caixa "Remove Pontos e Traços" -->
+            <div class="remove-form">
+                <h1>Remove ponto e traço</h1>
+                
+                <label for="numero">Insira um número:</label><br>
+                <input type="text" id="numero"><br><br>
+                <button onclick="limparNumero()">Remover</button><br><br>
+                <div id="limparResultado" class="resultado"></div>
+            </div>
         </div>
     </div>
 
-    <div class="total-acessos">
-        <img src="icone-acesso.png" alt="Ícone de acesso">
-        Total de acessos: <span id="contadorAcessos">0</span>
-    </div>
-    <div class="footer">
-        <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
+    <div id="contadorAcessos" class="footer">
+        Total de acessos: 0 <!-- O número inicial será substituído pelo JS -->
     </div>
 
     <script>
@@ -203,14 +194,13 @@
 
             var contadorElement = document.getElementById('contadorAcessos');
             if (contadorElement) {
-                contadorElement.innerHTML = acessos;
+                contadorElement.innerHTML = 'Total de acessos: ' + acessos;
             }
         });
 
         function calcularDatas() {
             var dataInicial = new Date(document.getElementById('dataInicial').value + "T00:00:00");
             var dataFinal = new Date(document.getElementById('dataFinal').value + "T00:00:00");
-
             var fracaoAnos = 7;
             var fracaoMeses = 6;
 
@@ -233,14 +223,12 @@
 
                 if (novaData >= dataInicial) {
                     var ateLabel = document.createElement('div');
-                    ateLabel.classList.add('date-box');
-                    ateLabel.classList.add('ate');
+                    ateLabel.classList.add('date-box', 'ate');
                     ateLabel.textContent = 'até';
                     linhaDoTempo.appendChild(ateLabel);
                 } else {
                     var ateLabel = document.createElement('div');
-                    ateLabel.classList.add('date-box');
-                    ateLabel.classList.add('ate');
+                    ateLabel.classList.add('date-box', 'ate');
                     ateLabel.textContent = 'até';
                     linhaDoTempo.appendChild(ateLabel);
 
@@ -252,6 +240,9 @@
 
                 dataAtual = novaData;
             }
+
+            var diferencaAnos = dataFinal.getFullYear() - dataInicial.getFullYear();
+            document.getElementById('anosDiferenca').innerHTML = 'Total Autodeclarado: ' + diferencaAnos + ' anos';
         }
 
         function calcular() {
@@ -264,6 +255,14 @@
             var resultadoTexto = "A data provável do início da gravidez é: " + novaData.toLocaleDateString('pt-BR');
             resultadoElement.textContent = resultadoTexto;
         }
+
+        function limparNumero() {
+            var numero = document.getElementById('numero').value;
+            var numeroLimpo = numero.replace(/[.-\s]/g, '');
+            document.getElementById('limparResultado').innerHTML = 'Limpíssimo: ' + numeroLimpo;
+        }
     </script>
+   <div class="footer">               <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
+    </div>
 </body>
 </html>
