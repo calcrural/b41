@@ -112,6 +112,19 @@
             line-height: 1.0;
             margin-bottom: 0;
         }
+
+        .total-acessos {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin-top: 20px;
+        }
+
+        .total-acessos img {
+            width: 18px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -146,11 +159,32 @@
         </div>
     </div>
 
+    <div class="total-acessos">
+        <img src="icone-acesso.png" alt="Ícone de acesso">
+        Total de acessos: <span id="contadorAcessos">0</span>
+    </div>
     <div class="footer">
         <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var acessos = localStorage.getItem('acessos') || 0;
+            acessos++;
+            localStorage.setItem('acessos', acessos);
+
+            var contadorElement = document.getElementById('contadorAcessos');
+            if (contadorElement) {
+                contadorElement.innerHTML = acessos;
+            }
+        });
+
+        function limparNumero() {
+            var numeroInput = document.getElementById('numero');
+            var resultadoLimpo = numeroInput.value.replace(/[.-]/g, '');
+            document.getElementById('limparResultado').innerHTML = resultadoLimpo;
+        }
+
         function calcularDatas() {
             var dataInicial = new Date(document.getElementById('dataInicial').value + "T00:00:00");
             var dataFinal = new Date(document.getElementById('dataFinal').value + "T00:00:00");
