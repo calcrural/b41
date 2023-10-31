@@ -30,6 +30,7 @@
             text-align: center;
             color: #333;
             font-size: 24px;
+            margin-bottom: 5px;
         }
 
         h2 {
@@ -166,7 +167,6 @@
     <div class="footer">
         <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var acessos = localStorage.getItem('acessos') || 0;
@@ -183,61 +183,6 @@
             var numeroInput = document.getElementById('numero');
             var resultadoLimpo = numeroInput.value.replace(/[.-]/g, '');
             document.getElementById('limparResultado').innerHTML = resultadoLimpo;
-        }
-
-        function calcularDatas() {
-            var dataInicial = new Date(document.getElementById('dataInicial').value + "T00:00:00");
-            var dataFinal = new Date(document.getElementById('dataFinal').value + "T00:00:00");
-            var fracaoAnos = 7;
-            var fracaoMeses = 6;
-
-            var linhaDoTempo = document.getElementById('linhaDoTempo');
-            linhaDoTempo.innerHTML = '';
-
-            var dataAtual = new Date(dataFinal);
-
-            while (dataAtual >= dataInicial) {
-                var dateBox = document.createElement('div');
-                dateBox.classList.add('date-box');
-                dateBox.textContent = dataAtual.toLocaleDateString('pt-BR');
-                linhaDoTempo.appendChild(dateBox);
-
-                var novaData = new Date(dataAtual);
-                novaData.setFullYear(dataAtual.getFullYear() - fracaoAnos);
-
-                var meses = novaData.getMonth() - fracaoMeses;
-                novaData.setMonth(meses);
-
-                if (novaData >= dataInicial) {
-                    var ateLabel = document.createElement('div');
-                    ateLabel.classList.add('date-box', 'ate');
-                    ateLabel.textContent = 'até';
-                    linhaDoTempo.appendChild(ateLabel);
-                } else {
-                    var ateLabel = document.createElement('div');
-                    ateLabel.classList.add('date-box', 'ate');
-                    ateLabel.textContent = 'até';
-                    linhaDoTempo.appendChild(ateLabel);
-
-                    var ultimaDateBox = document.createElement('div');
-                    ultimaDateBox.classList.add('date-box');
-                    ultimaDateBox.textContent = dataInicial.toLocaleDateString('pt-BR');
-                    linhaDoTempo.appendChild(ultimaDateBox);
-                }
-
-                dataAtual = novaData;
-            }
-        }
-
-        function calcular() {
-            var dataFatoGerador = new Date(document.getElementById('dataFatoGerador').value + "T00:00:00");
-            var resultadoElement = document.getElementById('resultado');
-
-            var novaData = new Date(dataFatoGerador);
-            novaData.setMonth(dataFatoGerador.getMonth() - 10);
-
-            var resultadoTexto = "A data provável do início da gravidez é: " + novaData.toLocaleDateString('pt-BR');
-            resultadoElement.textContent = resultadoTexto;
         }
     </script>
 </body>
