@@ -17,12 +17,12 @@
         }
 
         .container {
-            max-width: 840px;fremove-form
+            max-width: 600px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin: 20px;
+            padding: 10px;
+            margin: 10px;
             width: 100%;
         }
 
@@ -65,8 +65,8 @@
 
         .resultado {
             text-align: center;
-            font-size: 24px;
-            margin-top: 20px;
+            font-size: 20px;
+            margin-top: 10px;
             color: #007bff;
         }
 
@@ -75,7 +75,7 @@
             align-items: center;
             width: 100%;
             border: 1px solid #ccc;
-            padding: 10px;
+            padding: 5px;
             background-color: #fff;
             flex-wrap: wrap;
             justify-content: center;
@@ -85,8 +85,8 @@
         .date-box {
             text-align: center;
             border: 1px solid #ccc;
-            padding: 5px;
-            margin: 5px;
+            padding: 3px;
+            margin: 3px;
             background-color: #007bff;
             color: #fff;
             border-radius: 4px;
@@ -98,30 +98,27 @@
 
         .footer {
             text-align: center;
-            font-size: 14px;
+            font-size: 12px;
             color: #555;
-            margin-top: 20px;
+            margin-top: 10px;
+            line-height: 1.0;
+            margin-bottom: 0;
         }
 
-       .remove-form {
-              width: 250px;
-              height: 380px;
-              margin-top: 150px; /* Add this line to set the margin */
-              padding-left: 25px;
-              padding-right: 25px;
-              max-width: 100%;
-              background-color: #fff;
-              border-radius: 8px;
-              box-shadow: 0 0 10px rgba(0,0,0,0.1);
-              padding: 20px;
-              margin: 20px;
-}
-
+        .remove-form {
+            width: 250px;
+            max-width: 100%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 10px;
+            margin: 10px;
+        }
 
         .remove-form h1 {
-            font-size: 100%; /* Reduz o tamanho em 20% */
-            font-weight: bold; /* Coloca em negrito */
-            margin-bottom: 20px; /* Adiciona um espaço extra abaixo do título */
+            font-size: 90%;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
         .remove-form label {
@@ -138,20 +135,20 @@
         }
 
         .remove-form #limparResultado {
-            font-size: 16px;
+            font-size: 14px;
             margin-top: 10px;
             text-align: center;
         }
 
         .total-acessos {
             text-align: center;
-            font-size: 14px;
+            font-size: 12px;
             color: #555;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .total-acessos img {
-            width: 20px;
+            width: 18px;
             vertical-align: middle;
             margin-right: 5px;
         }
@@ -159,7 +156,7 @@
 </head>
 <body>
     <div class="container">
-        <div style="display: flex; gap: 20px;">
+        <div style="display: flex; gap: 10px;">
             <div>
                 <h1>Calculadoras B41 e B80 RURAL</h1>
 
@@ -191,7 +188,6 @@
                 </div>
             </div>
 
-            <!-- Caixa "Remover Pontos e Traços" -->
             <div class="remove-form">
                 <h1>REMOVE PONTO E TRAÇO</h1>
                 
@@ -204,8 +200,8 @@
     </div>
 
     <div class="total-acessos">
-        <img src="icone-acesso.png" alt="Ícone de acesso"> <!-- Substitua "icone-acesso.png" pelo caminho do seu ícone -->
-        Total de acessos: <span id="contadorAcessos">0</span> <!-- O número inicial será substituído pelo JS -->
+        <img src="icone-acesso.png" alt="Ícone de acesso">
+        Total de acessos: <span id="contadorAcessos">0</span>
     </div>
     <div class="footer">
         <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
@@ -222,7 +218,6 @@
             }
         });
 
-        // Restante do seu script...
-    </script>
+     </script>
 </body>
 </html>
