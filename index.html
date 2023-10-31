@@ -17,7 +17,7 @@
         }
 
         .container {
-            max-width: 640px; /* Reduz a largura em 20% */
+            max-width: 540px; /* Reduz a largura em 20% */
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -205,11 +205,9 @@
         <img src="icone-acesso.png" alt="Ícone de acesso"> <!-- Substitua "icone-acesso.png" pelo caminho do seu ícone -->
         Total de acessos: <span id="contadorAcessos">0</span> <!-- O número inicial será substituído pelo JS -->
     </div>
-
     <div class="footer">
         <p>Desenvolvido por ESTANISLAU MORAIS DE MELO - Todos os direitos reservados - copyright ©.</p>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var acessos = localStorage.getItem('acessos') || 0;
