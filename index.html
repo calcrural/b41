@@ -1,285 +1,95 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadoras B41 e B80 RURAL</title>
-    <style>
-        body {
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso Restrito</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-        .container {
-            max-width: 800px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin: 20px auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
+    .login-container {
+      width: 320px;
+      padding: 40px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
 
-        .calculadora {
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
-        }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
 
-        h1, h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 8px;
+      color: #555;
+    }
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #555;
-        }
+    input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
 
-        input, select, button {
-            padding: 10px;
-            width: calc(100% - 20px);
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    button {
+      width: calc(100% - 20px);
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-        select {
-            appearance: none;
-            background-color: #f5f5f5;
-            color: #333;
-        }
+    button:hover {
+      background-color: #0056b3;
+    }
 
-        button {
-            font-size: 16px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            display: block;
-            margin: 0 auto;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .resultado {
-            text-align: center;
-            font-size: 24px;
-            margin-top: 20px;
-            color: #007bff;
-        }
-
-        .timeline {
-            display: flex;
-            align-items: center;
-            border: 1px solid #ccc;
-            padding: 10px;
-            background-color: #fff;
-            flex-wrap: wrap;
-            justify-content: center;
-            border-radius: 8px;
-        }
-
-        .date-box {
-            text-align: center;
-            border: 1px solid #ccc;
-            padding: 5px;
-            margin: 5px;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 4px;
-        }
-
-        .date-box.ate {
-            background-color: #555;
-        }
-
-        .remove-form {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
-        }
-
-        .remove-form label {
-            color: #555;
-        }
-
-        .remove-form input {
-            width: calc(100% - 20px);
-        }
-
-        .remove-form button {
-            margin-top: 10px;
-            width: 100%;
-        }
-
-        .remove-form #limparResultado {
-            font-size: 16px;
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .footer {
-            text-align: center;
-            font-size: 12px;
-            color: #555;
-            padding: 10px;
-            background-color: #f9f9f9;
-            margin-top: auto;
-        }
-    </style>
+    #error-message {
+      color: red;
+      margin-top: 10px;
+      text-align: left;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="calculadora" id="calculadoraB41">
-            <h2>Fracionamento da Autodeclaração- B41</h2>
-            <label for="dataInicial">Data Inicial:</label>
-            <input type="date" id="dataInicial">
-            <label for="dataFinal">Data Final:</label>
-            <input type="date" id="dataFinal">
-            <button onclick="calcularDatas()">Calcular</button>
-            <div class="anos-diferenca" id="anosDiferenca"></div>
-            <div id="linhaDoTempo" class="timeline"></div>
-        </div>
+  <div class="login-container">
+    <h2>Acesso Restrito</h2>
+    <form id="login-form">
+      <label for="username">Usuário:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Senha:</label>
+      <input type="password" id="password" name="password" required>
+      <button type="submit">Login</button>
+    </form>
+    <div id="error-message"></div>
+  </div>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
 
-        <div class="calculadora" id="calculadoraB80">
-            <h2>Data início da gravidez - B80</h2>
-            <label for="dataFatoGerador">Data do Parto:</label>
-            <input type="date" id="dataFatoGerador">
-            <button onclick="calcular()">Calcular</button>
-            <div id="resultado" class="resultado"></div>
-        </div>
-
-        <div class="calculadora" id="calculadoraDatas">
-            <h2>Calculadora de Datas</h2>
-            <label for="data">Data:</label>
-            <input type="date" id="data">
-            <label for="operacao">Operação:</label>
-            <select id="operacao">
-                <option value="adicao">Adição</option>
-                <option value="subtracao">Subtração</option>
-            </select>
-            <label for="anos">Anos:</label>
-            <input type="number" id="anos" min="0">
-            <label for="meses">Meses:</label>
-            <input type="number" id="meses" min="0" max="11">
-            <button onclick="calcularData()">Calcular</button>
-            <div id="resultadoData" class="resultado"></div>
-        </div>
-
-        <!-- Caixa "Remove Pontos e Traços" -->
-        <div class="calculadora remove-form">
-            <h2>Remove caracteres especiais</h2>
-            <label for="numero">Insira um número:</label><br>
-            <input type="text" id="numero"><br><br>
-            <button onclick="limparNumero()">Remover</button><br><br>
-            <div id="limparResultado" class="resultado"></div>
-        </div>
-    </div>
-
-    <div class="footer">
-        <p>Desenvolvido por MORAISLAB - Todos os direitos reservados - copyright ©</p>
-        <p>Total de acessos: <span id="contadorAcessos">0</span></p>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var acessos = localStorage.getItem('acessos') || 0;
-            acessos++;
-            localStorage.setItem('acessos', acessos);
-
-            var contadorElement = document.getElementById('contadorAcessos');
-            if (contadorElement) {
-                contadorElement.innerHTML = acessos;
-            }
-        });
-
-        function calcularDatas() {
-            var dataInicial = new Date(document.getElementById('dataInicial').value + "T00:00:00");
-            var dataFinal = new Date(document.getElementById('dataFinal').value + "T00:00:00");
-
-            var linhaDoTempo = document.getElementById('linhaDoTempo');
-            linhaDoTempo.innerHTML = '';
-
-            var dataAtual = new Date(dataFinal);
-
-            while (dataAtual >= dataInicial) {
-                var dateBox = document.createElement('div');
-                dateBox.classList.add('date-box');
-                dateBox.textContent = dataAtual.toLocaleDateString('pt-BR');
-                linhaDoTempo.appendChild(dateBox);
-
-                var novaData = new Date(dataAtual);
-                novaData.setFullYear(dataAtual.getFullYear() - 7);
-                novaData.setMonth(dataAtual.getMonth() - 6);
-
-                dataAtual = novaData;
-
-                if (dataAtual >= dataInicial) {
-                    var ateBox = document.createElement('div');
-                    ateBox.classList.add('date-box', 'ate');
-                    ateBox.textContent = 'até';
-                    linhaDoTempo.appendChild(ateBox);
-                }
-            }
-
-            var diferencaAnos = dataFinal.getFullYear() - dataInicial.getFullYear();
-            document.getElementById('anosDiferenca').innerHTML = 'Total Autodeclarado: ' + diferencaAnos + ' anos';
-        }
-
-        function calcular() {
-            var dataFatoGerador = new Date(document.getElementById('dataFatoGerador').value + "T00:00:00");
-            var resultadoElement = document.getElementById('resultado');
-
-            var novaData = new Date(dataFatoGerador);
-            novaData.setMonth(dataFatoGerador.getMonth() - 10);
-
-            var resultadoTexto = "A data provável do início da gravidez é: " + novaData.toLocaleDateString('pt-BR');
-            resultadoElement.textContent = resultadoTexto;
-        }
-
-        function calcularData() {
-            var data = new Date(document.getElementById('data').value + "T00:00:00");
-            var operacao = document.getElementById('operacao').value;
-            var anos = parseInt(document.getElementById('anos').value);
-            var meses = parseInt(document.getElementById('meses').value);
-
-            if (isNaN(anos)) anos = 0;
-            if (isNaN(meses)) meses = 0;
-
-            var novaData = new Date(data);
-
-            if (operacao === 'adicao') {
-                novaData.setFullYear(novaData.getFullYear() + anos);
-                novaData.setMonth(novaData.getMonth() + meses);
-            } else {
-                novaData.setFullYear(novaData.getFullYear() - anos);
-                novaData.setMonth(novaData.getMonth() - meses);
-            }
-
-            document.getElementById('resultadoData').innerHTML = 'Resultado: ' + novaData.toLocaleDateString('pt-BR');
-        }
-
-        function limparNumero() {
-            var numero = document.getElementById('numero').value;
-            var numeroLimpo = numero.replace(/[^\d]/g, ''); // Remove todos os caracteres não numéricos
-            document.getElementById('limparResultado').textContent = numeroLimpo;
-        }
-    </script>
+      if (username === 'inss' && password === 'inss') {
+        window.location.href = 'pagina_principal.html';
+      } else {
+        document.getElementById('error-message').textContent = 'Usuário ou senha incorretos.';
+      }
+    });
+  </script>
 </body>
 </html>
