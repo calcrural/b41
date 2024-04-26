@@ -187,6 +187,12 @@
             <h2>Remove caracteres especiais</h2>
             <label for="numero">Insira um número:</label><br>
             <input type="text" id="numero"><br><br>
+            <label for="tipoRemocao">Tipo de Remoção:</label>
+            <select id="tipoRemocao">
+                <option value="padrao">Padrão (Exceto números)</option>
+                <option value="cnpj">CNPJ</option>
+                <option value="cpf">CPF</option>
+            </select><br><br>
             <button onclick="limparNumero()">Remover</button><br><br>
             <div id="limparResultado" class="resultado"></div>
         </div>
@@ -225,12 +231,17 @@
                 linhaDoTempo.appendChild(dateBox);
 
                 var novaData = new Date(dataAtual);
-                novaData.setFullYear(novaData.getFullYear() - 7);
-                novaData.setMonth(novaData.getMonth() - 6);
+                novaData.setFullYear(dataAtual.getFullYear() - 7);
+                novaData.setMonth(dataAtual.getMonth() - 6);
 
                 dataAtual = novaData;
 
-                if (dataAtual >= dataInicial) {
+                if (dataAtual < dataInicial) {
+                    var ateBox = document.createElement('div');
+                    ateBox.classList.add('date-box', 'ate');
+                    ateBox.textContent = 'até ' + dataInicial.toLocaleDateString('pt-BR');
+                    linhaDoTempo.appendChild(ateBox);
+                } else {
                     var ateBox = document.createElement('div');
                     ateBox.classList.add('date-box', 'ate');
                     ateBox.textContent = 'até';
@@ -247,7 +258,7 @@
             var resultadoElement = document.getElementById('resultado');
 
             var novaData = new Date(dataFatoGerador);
-            novaData.setMonth(novaData.getMonth() - 10);
+            novaData.setMonth(dataFatoGerador.getMonth() - 10);
 
             var resultadoTexto = "A data provável do início da gravidez é: " + novaData.toLocaleDateString('pt-BR');
             resultadoElement.textContent = resultadoTexto;
@@ -277,7 +288,15 @@
 
         function limparNumero() {
             var numero = document.getElementById('numero').value;
+            var tipoRemocao = document.getElementById('tipoRemocao').value;
             var numeroLimpo = numero.replace(/[^\d]/g, ''); // Remove todos os caracteres não numéricos
+
+            if (tipoRemocao === 'cnpj') {
+                numeroLimpo = numeroLimpo.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
+            } else if (tipoRemocao === 'cpf') {
+                numeroLimpo = numeroLimpo.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
+            }
+
             document.getElementById('limparResultado').textContent = numeroLimpo;
         }
     </script>
