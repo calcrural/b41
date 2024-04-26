@@ -225,8 +225,8 @@
                 linhaDoTempo.appendChild(dateBox);
 
                 var novaData = new Date(dataAtual);
-                novaData.setFullYear(dataAtual.getFullYear() - 7);
-                novaData.setMonth(dataAtual.getMonth() - 6);
+                novaData.setFullYear(novaData.getFullYear() - 7);
+                novaData.setMonth(novaData.getMonth() - 6);
 
                 dataAtual = novaData;
 
@@ -247,7 +247,7 @@
             var resultadoElement = document.getElementById('resultado');
 
             var novaData = new Date(dataFatoGerador);
-            novaData.setMonth(dataFatoGerador.getMonth() - 10);
+            novaData.setMonth(novaData.getMonth() - 10);
 
             var resultadoTexto = "A data provável do início da gravidez é: " + novaData.toLocaleDateString('pt-BR');
             resultadoElement.textContent = resultadoTexto;
